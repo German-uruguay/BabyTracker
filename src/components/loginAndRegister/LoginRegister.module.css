@@ -1,0 +1,71 @@
+.container {
+  /*  background-color: rgba(251, 221, 255, 0.932); */
+  background-color: white;
+  padding: 2rem;
+  /*  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  max-width: 400px;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  color: rgba(167, 64, 180, 0.932);
+  font-weight: 800;
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+
+.label {
+  color: rgba(167, 64, 180, 0.932);
+  font-weight: 800;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  background-image: url("https://img.freepik.com/foto-gratis/lindo-bebe_624325-1658.jpg?w=740&t=st=1722342176~exp=1722342776~hmac=a80559ac5bda3a3f6ca3fd4db8e55bcdef77631cbb4dfb73a9d5276132ea005e");
+  width: 50%;
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: cover;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.formWrapper {
+  margin: auto;
+}
+
+.boton {
+  background-color: rgba(197, 105, 209, 0.932);
+  color: white;
+  border: none;
+  padding: 10px; /* Ajusta el padding según sea necesario */
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: background-color 0.3s ease;
+  margin-bottom: 5px;
+  width: 100px;
+}
+
+/* Estilos para el botón cuando está enfocado */
+.boton:hover {
+  background-color: rgba(
+    167,
+    64,
+    180,
+    0.932
+  ); /* Cambia este valor al color que desees */
+  outline: none; /* Quita el borde predeterminado del navegador */
+}

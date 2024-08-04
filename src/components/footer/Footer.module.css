@@ -1,0 +1,24 @@
+footer {
+  background-color: #1e1014;
+
+  display: flex;
+  color: white;
+}
+
+footer p {
+  margin: auto;
+  padding: 3px;
+}
+.nombre {
+  font-family: "arizonia";
+  font-size: 24px;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}

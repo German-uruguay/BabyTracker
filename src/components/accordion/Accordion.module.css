@@ -1,0 +1,37 @@
+.accordion {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.item {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  padding: 20px 24px;
+  padding-right: 48px;
+  border-top: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  border-radius: 10px;
+  display: grid;
+  column-gap: 24px;
+  row-gap: 32px;
+  align-items: center;
+}
+
+.title {
+  cursor: pointer;
+}
+.title p {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: rgba(167, 64, 180, 0.932);
+  font-family: var(--bs-body-font-family);
+  font-weight: 600;
+  grid-column: auto;
+}
+
+/* OPEN STATE */
+.open {
+  border-top: 4px solid rgba(167, 64, 180, 0.932);
+}

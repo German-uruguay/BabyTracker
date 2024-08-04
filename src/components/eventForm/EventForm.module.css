@@ -1,0 +1,13 @@
+.label {
+  color: rgba(167, 64, 180, 0.932);
+  font-weight: 800;
+}
+
+.header {
+  color: rgba(167, 64, 180, 0.932);
+  font-weight: 800;
+}
+
+.customInput {
+  margin-bottom: 1rem;
+}
