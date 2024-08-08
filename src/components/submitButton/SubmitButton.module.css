@@ -1,49 +1,17 @@
-/* Estilos para el botón */
 .button {
   background-color: rgba(197, 105, 209, 0.932);
   color: white;
   border: none;
-  padding: 10px 0; /* Ajusta el padding según sea necesario */
+  padding: 10px 0;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: 100%; /* Hace que el botón ocupe todo el ancho del contenedor */
+  width: 100%;
 }
 
-/* Estilos para el botón cuando está enfocado */
 .button:hover {
   background-color: rgba(197, 105, 209, 0.932);
-  background-color: rgba(
-    167,
-    64,
-    180,
-    0.932
-  ); /* Cambia este valor al color que desees */
-  outline: none; /* Quita el borde predeterminado del navegador */
+  background-color: rgba(167, 64, 180, 0.932);
+  outline: none;
 }
-/* .button {
-  background-color: white;
-  color: rgba(197, 105, 209, 0.932);
-  border: none;
-  padding: 10px 0; 
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  width: 100%; 
-} */
-
-/* Estilos para el botón cuando está enfocado 
-.button:hover {
-  color: white;
-  background-color: rgba(197, 105, 209, 0.932);
-  background-color: rgba(
-    197,
-    105,
-    209,
-    0.932
-  ); Cambia este valor al color que desees
-  outline: none; Quita el borde predeterminado del navegador
-} */

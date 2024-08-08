@@ -9,7 +9,7 @@ function AccordionItem({ title, children }) {
 
   useEffect(() => {
     //lo utilizo para desplazarme al div cuando isOpen cambia a true.
-    if (isOpen /* &&  itemRef.current */) {
+    if (isOpen) {
       //itemReg.current accede al nodo del dom directamente
       itemRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }

@@ -8,22 +8,22 @@ function BabyBottleReport() {
 
   const biberones = eventos[35];
 
+  console.log(biberones);
   let biberonesDeHoy;
   let cantidadBiberonesDeHoy;
   let fechaBiberonMasReciente;
-  if (biberones) {
+  if (biberones && biberones.length > 0) {
     biberonesDeHoy = biberones.filter((evento) => {
       return moment(evento.fecha).format("YYYY-MM-DD") === fechaActual;
     });
 
     cantidadBiberonesDeHoy = biberonesDeHoy.length;
-    if (cantidadBiberonesDeHoy > 0) {
-      //para chekear que hoy hayan biberones ingresados
-      fechaBiberonMasReciente = biberonesDeHoy.reduce((latest, item) => {
-        const currentDate = moment(item.fecha);
-        return currentDate.isAfter(latest) ? currentDate : latest;
-      }, moment(biberonesDeHoy[0].fecha))._i;
-    }
+
+    //para chekear que hoy hayan biberones ingresados
+    fechaBiberonMasReciente = biberones.reduce((latest, item) => {
+      const currentDate = moment(item.fecha);
+      return currentDate.isAfter(latest) ? currentDate : latest;
+    }, moment(biberones[0].fecha))._i;
   }
 
   let dataInformeBiberon = {

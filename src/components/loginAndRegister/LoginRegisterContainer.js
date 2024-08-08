@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import styles from "./LoginRegister.module.css";
-function LogRegContainer() {
+function LoginRegisterContainer({ children }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftDiv}>
@@ -12,10 +12,10 @@ function LogRegContainer() {
         </Link>
       </div>
       <div className={styles.formWrapper}>
-        <Outlet /> {/* Aca se renderizarian Login o Register segun la ruta */}
+        {children} {/* Aca se renderizarian Login o Register segun la ruta */}
       </div>
     </div>
   );
 }
 
-export default LogRegContainer;
+export default LoginRegisterContainer;

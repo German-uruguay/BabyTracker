@@ -7,6 +7,7 @@ function DailyDiaperReport() {
   const fechaActual = moment().format("YYYY-MM-DD");
 
   const paniales = eventos[33];
+  console.log("pañales", paniales);
   let panialesDeHoy;
   let cantidadPanialesDeHoy;
   let fechaPanialMasReciente;
@@ -15,12 +16,11 @@ function DailyDiaperReport() {
       return moment(evento.fecha).format("YYYY-MM-DD") === fechaActual;
     });
     cantidadPanialesDeHoy = panialesDeHoy.length;
-    if (cantidadPanialesDeHoy > 0) {
-      fechaPanialMasReciente = panialesDeHoy.reduce((latest, item) => {
-        const currentDate = moment(item.fecha);
-        return currentDate.isAfter(latest) ? currentDate : latest;
-      }, moment(panialesDeHoy[0].fecha))._i;
-    }
+
+    fechaPanialMasReciente = paniales.reduce((latest, item) => {
+      const currentDate = moment(item.fecha);
+      return currentDate.isAfter(latest) ? currentDate : latest;
+    }, moment(paniales[0].fecha))._i;
   }
 
   let dataInformePanial = {

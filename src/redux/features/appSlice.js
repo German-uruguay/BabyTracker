@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   categorias: [],
+  departamentos: [],
 };
 
 const appSlice = createSlice({
@@ -11,8 +12,11 @@ const appSlice = createSlice({
     cargarCategorias: (state, action) => {
       state.categorias = action.payload;
     },
+    cargarDepartamentos: (state, action) => {
+      state.departamentos = action.payload;
+    },
   },
 });
 
-export const { cargarCategorias } = appSlice.actions;
+export const { cargarCategorias, cargarDepartamentos } = appSlice.actions;
 export default appSlice.reducer;

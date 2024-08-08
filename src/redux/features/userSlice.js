@@ -38,7 +38,6 @@ const userSlice = createSlice({
       state.eventos[action.payload.idCategoria] = state.eventos[
         action.payload.idCategoria
       ].filter((evento) => evento.id !== action.payload.idEvento);
-      /*    state.eventos.filter((e) => e.idEvento !== action.payload); */
     },
   },
 });

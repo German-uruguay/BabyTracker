@@ -16,40 +16,60 @@ import DailyDiaperReport from "../informeDeEvento/DailyDiaperReport";
 import BabyBottleReport from "../informeDeEvento/BabyBottleReport";
 import AccordionItem from "../accordion/AccordionItem";
 import { Spinner } from "react-bootstrap";
-
+import { toast } from "react-toastify";
 function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const apiKey = localStorage.getItem("apiKey");
   const idUsuario = localStorage.getItem("idUsuario");
-
+  const notify = (mensaje) => toast(mensaje, { autoClose: 2000 });
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!apiKey || !idUsuario) {
+      notify("Debe hacer login para acceder a la página principal");
       navigate("/login");
       return;
     }
 
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const eventosIniciales = await api.getEventos(apiKey, idUsuario);
-        const categorias = await api.getCategorias(apiKey, idUsuario);
+        // Obtener eventos y categorías
+        const responseEventos = await api.getEventos(apiKey, idUsuario);
+        const responseCategorias = await api.getCategorias(apiKey, idUsuario);
 
-        const eventosConImagen = eventosIniciales.map((evento) => {
-          const categoria = categorias.find(
-            (cat) => cat.id === evento.idCategoria
+        // Procesar eventos y categorías
+        if (
+          responseCategorias.data.codigo === 200 &&
+          responseEventos.data.codigo === 200
+        ) {
+          const eventosConImagen = responseEventos.data.eventos.map(
+            (evento) => {
+              const categoria = responseCategorias.data.categorias.find(
+                (cat) => cat.id === evento.idCategoria
+              );
+              return {
+                ...evento,
+                imagen: categoria?.imagen,
+              };
+            }
           );
-          return {
-            ...evento,
-            imagen: categoria?.imagen,
-          };
-        });
 
-        dispatch(cargarEventosIniciales(eventosConImagen));
-        dispatch(cargarCategorias(categorias));
+          // Despachar los datos al estado global
+          dispatch(cargarEventosIniciales(eventosConImagen));
+          dispatch(cargarCategorias(responseCategorias.data.categorias));
+        }
       } catch (err) {
-        console.log("Error al cargar eventos iniciales:", err);
+        console.log("log del err: ", err);
+
+        if (err.message === "API Key o usuario inválido") {
+          notify("La apiKey ha expirado. Vuelva a loguearse");
+          localStorage.clear();
+          navigate("/login");
+        } else {
+          notify("Error al cargar los eventos y categorías.");
+        }
       } finally {
         setLoading(false);
       }
@@ -58,7 +78,7 @@ function Dashboard() {
     fetchData();
   }, [dispatch, apiKey, idUsuario, navigate]);
 
-  if (loading) {
+  if (loading || !apiKey || !idUsuario) {
     return (
       <div className="spinnerContainer">
         <Spinner animation="border" />

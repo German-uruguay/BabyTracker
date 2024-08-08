@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { toast } from "react-toastify";
 import SubmitButton from "../submitButton/SubmitButton";
@@ -14,6 +15,7 @@ import { Spinner } from "react-bootstrap";
 function EventForm() {
   const categorias = useSelector((state) => state.app.categorias);
   const userId = useSelector((state) => state.user.usuarioLogueado.userId);
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const notify = (mensaje) => toast(mensaje, { autoClose: 1500 });
   const [loading, setLoading] = useState(false);
@@ -45,6 +47,11 @@ function EventForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!apiKey || !idUsuario) {
+      navigate("/login");
+      notify("La sesión ha expirado");
+      return;
+    }
     setLoading(true);
     // Crear un objeto moment para verificar la fecha
     const fechaActual = moment();
@@ -86,22 +93,22 @@ function EventForm() {
 
     try {
       let respuesta = await api.postEvento(dataToSubmit);
-      if (respuesta.codigo === 200) {
-        notify(respuesta.mensaje);
+      if (respuesta.data.codigo === 200) {
+        notify(respuesta.data.mensaje);
+
         dispatch(
           agregarEvento({
             ...dataToSubmit,
             imagen: imagenDelEvento,
-            id: respuesta.idEvento,
+            id: respuesta.data.idEvento,
           })
         );
         setError("");
       } else {
-        setError(respuesta.mensaje);
+        setError(respuesta.data?.mensaje);
       }
     } catch (err) {
-      setError("Error al enviar el evento.");
-      console.error(err);
+      setError(err.message);
     } finally {
       setLoading(false);
     }

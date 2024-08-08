@@ -5,11 +5,10 @@ function TiempoBiberon() {
   const eventos = useSelector((state) => state.user?.eventos || {});
 
   const fechaActual = moment().format("YYYY-MM-DD");
-
+  console.log("fecha: ", fechaActual);
   const biberones = eventos[35];
 
   let ultimoBiberon;
-  let biberonesDeHoy;
 
   if (biberones) {
     ultimoBiberon = biberones.reduce((latest, item) => {
@@ -20,21 +19,8 @@ function TiempoBiberon() {
         ? item
         : latest;
     }, biberones[0]);
-    biberonesDeHoy = biberones.filter((evento) => {
-      return moment(evento.fecha).format("YYYY-MM-DD") === fechaActual;
-    });
   }
-  if (!biberonesDeHoy) {
-    return (
-      <p>
-        No se han ingresado biberones en el dia de hoy. Dale el biberón a
-        primera hora.
-      </p>
-    );
-  }
-
   const fechaUltimoBiberonStr = ultimoBiberon?.fecha;
-
   // Parsear la fecha con moment
   const fechaUltimoBiberon = moment(
     fechaUltimoBiberonStr,
@@ -46,23 +32,21 @@ function TiempoBiberon() {
   const proximoBiberon = fechaUltimoBiberon.add(cuatroHoras);
 
   // Calcular la diferencia entre el tiempo actual y el próximo biberón
-  const tiempoRestante = moment.duration(proximoBiberon.diff(moment()));
+  const tiempoRestante = moment.duration(proximoBiberon.diff(moment())); //moment() es el momento actual
+  console.log("tiempo restante: ", tiempoRestante);
 
   // Formatear la diferencia en horas y minutos
   const horasRestantes = Math.floor(tiempoRestante.asHours());
   const minutosRestantes = Math.floor(tiempoRestante.minutes());
   if (isNaN(horasRestantes) || isNaN(minutosRestantes)) {
-    return (
-      <p>
-        No se han ingresado biberones en el dia de hoy. Dale el biberón a
-        primera hora.
-      </p>
-    );
+    return <p>Todavia no se han ingresado biberones. Ingresa el primero.</p>;
   }
   return (
     <p
       className={
-        horasRestantes <= 0 ? "text-danger fw-bolder" : "text-success fw-bolder"
+        horasRestantes <= 0 && minutosRestantes <= 0
+          ? "text-danger fw-bolder"
+          : "text-success fw-bolder"
       }
     >
       {horasRestantes <= 0 && minutosRestantes <= 0

@@ -31,3 +31,25 @@ body {
   justify-content: center;
   margin-top: -30px;
 }
+
+.fixedButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+
+  background-color: rgba(197, 105, 209, 0.932);
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  z-index: 1000; /* Para asegurarse de que esté sobre otros elementos */
+}
+
+.fixedButton:hover {
+  background-color: rgba(167, 64, 180, 0.932);
+  outline: none;
+}

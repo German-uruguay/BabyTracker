@@ -9,7 +9,6 @@ function AllEventsChart() {
     .map((id) => {
       //esto es un array con los nombres de las categorias.
       const categoria = categorias.find((categoria) => categoria.id == id); //el == en vez de === es porque tengo strings
-      /*    console.log("categoria", categoria); */
       return categoria && eventos[categoria.id].length !== 0
         ? categoria.tipo
         : null;
