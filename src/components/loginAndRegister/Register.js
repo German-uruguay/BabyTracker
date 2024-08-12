@@ -23,7 +23,7 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const notify = (mensaje) => toast(mensaje, { autoClose: 2000 });
   const departamentos = useSelector((state) => state.app.departamentos);
-
+  console.log(formData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ function Register() {
         setCiudades([]); // Limpiar el estado en caso de error
       }
     }
-
+    setFormData({ ...formData, idCiudad: "" });
     fetchCiudades();
   }, [formData.idDepartamento]);
 
