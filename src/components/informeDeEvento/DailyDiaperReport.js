@@ -17,10 +17,12 @@ function DailyDiaperReport() {
     });
     cantidadPanialesDeHoy = panialesDeHoy.length;
 
-    fechaPanialMasReciente = paniales.reduce((latest, item) => {
-      const currentDate = moment(item.fecha);
-      return currentDate.isAfter(latest) ? currentDate : latest;
-    }, moment(paniales[0].fecha))._i;
+    if (paniales.length > 0) {
+      fechaPanialMasReciente = paniales.reduce((latest, item) => {
+        const currentDate = moment(item.fecha);
+        return currentDate.isAfter(latest) ? currentDate : latest;
+      }, moment(paniales[0].fecha))._i;
+    }
   }
 
   let dataInformePanial = {

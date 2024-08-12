@@ -3,8 +3,10 @@ import moment from "moment";
 
 function InformeDeEvento({ dataEvento }) {
   const { tipo, cantidadDeVecesOcurrido, fechaUltimoEvento } = dataEvento;
-
+  console.log("fecha del ultimo evento", fechaUltimoEvento);
   const [diferenciaEnTiempo, setDiferenciaEnTiempo] = useState({
+    days: null,
+    hours: null,
     minutes: null,
     seconds: null,
   });
@@ -17,9 +19,15 @@ function InformeDeEvento({ dataEvento }) {
           moment(fechaUltimoEvento),
           "seconds"
         );
-        const minutes = Math.floor(diferenciaEnSegundos / 60);
+
+        const days = Math.floor(diferenciaEnSegundos / (24 * 60 * 60));
+        const hours = Math.floor(
+          (diferenciaEnSegundos % (24 * 60 * 60)) / (60 * 60)
+        );
+        const minutes = Math.floor((diferenciaEnSegundos % (60 * 60)) / 60);
         const seconds = diferenciaEnSegundos % 60;
-        setDiferenciaEnTiempo({ minutes, seconds });
+
+        setDiferenciaEnTiempo({ days, hours, minutes, seconds });
       };
 
       actualizarDiferenciaEnTiempo();
@@ -27,12 +35,25 @@ function InformeDeEvento({ dataEvento }) {
       const intervalo = setInterval(actualizarDiferenciaEnTiempo, 1000);
       // Limpio el intervalo al desmontar
       return () => clearInterval(intervalo);
+    } else {
+      setDiferenciaEnTiempo({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     }
   }, [fechaUltimoEvento]);
 
+  const formatearTiempo = (valor, unidad) => {
+    return `${valor} ${unidad}${valor !== 1 ? "s" : ""}`;
+  };
+
   const renderizarContenido = () => {
-    const { minutes, seconds } = diferenciaEnTiempo;
-    const tiempoFormateado = `${minutes} minutos y ${seconds} segundos`;
+    const { days, hours, minutes, seconds } = diferenciaEnTiempo;
+
+    const tiempoFormateado = `${formatearTiempo(
+      days,
+      "día"
+    )}, ${formatearTiempo(hours, "hora")}, ${formatearTiempo(
+      minutes,
+      "minuto"
+    )}, y ${formatearTiempo(seconds, "segundo")}`;
 
     switch (tipo) {
       case "Biberon":
@@ -54,8 +75,16 @@ function InformeDeEvento({ dataEvento }) {
             <>
               <p>Todavía no se ha registrado un biberón para este día.</p>
               <p>
-                <strong>Tiempo transcurrido desde el último biberón:</strong>{" "}
-                {tiempoFormateado}
+                {fechaUltimoEvento === undefined ? (
+                  "No se ha registrado ningún evento de este tipo y por lo tanto, no se puede calcular la fecha del último evento"
+                ) : (
+                  <>
+                    <strong>
+                      Tiempo transcurrido desde el último biberón:
+                    </strong>{" "}
+                    {tiempoFormateado}
+                  </>
+                )}
               </p>
             </>
           );
@@ -82,8 +111,14 @@ function InformeDeEvento({ dataEvento }) {
                 Todavía no se ha registrado un cambio de pañal para este día.
               </p>
               <p>
-                <strong>Tiempo transcurrido desde el último cambio:</strong>{" "}
-                {tiempoFormateado}
+                {fechaUltimoEvento === undefined ? (
+                  "No se ha registrado ningún evento de este tipo y por lo tanto, no se puede calcular la fecha del último evento"
+                ) : (
+                  <>
+                    <strong>Tiempo transcurrido desde el último cambio:</strong>{" "}
+                    {tiempoFormateado}
+                  </>
+                )}
               </p>
             </>
           );
@@ -94,7 +129,7 @@ function InformeDeEvento({ dataEvento }) {
     }
   };
 
-  return <div className="informe-de-evento">{renderizarContenido()}</div>;
+  return <div className="informeDeEvento">{renderizarContenido()}</div>;
 }
 
 export default InformeDeEvento;

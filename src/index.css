@@ -37,11 +37,12 @@ body {
   bottom: 0;
   right: 0;
   margin: 20px;
+  margin-bottom: 45px;
 
   background-color: rgba(197, 105, 209, 0.932);
   color: white;
   border: none;
-  padding: 10px 10px;
+  padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;

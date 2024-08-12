@@ -39,7 +39,12 @@ function TiempoBiberon() {
   const horasRestantes = Math.floor(tiempoRestante.asHours());
   const minutosRestantes = Math.floor(tiempoRestante.minutes());
   if (isNaN(horasRestantes) || isNaN(minutosRestantes)) {
-    return <p>Todavia no se han ingresado biberones. Ingresa el primero.</p>;
+    return (
+      <p>
+        Todavia no se han ingresado biberones. Ingresa el primero para poder
+        calcular cuando le toca el próximo biberón a tu bebe.
+      </p>
+    );
   }
   return (
     <p

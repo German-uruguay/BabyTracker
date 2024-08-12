@@ -4,7 +4,13 @@ import Login from "./components/loginAndRegister/Login";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Header from "./components/header/Header";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
@@ -19,7 +25,8 @@ function App() {
     <BrowserRouter>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Outlet />}>
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<Outlet />}>
           <Route
             index
             element={
@@ -30,9 +37,9 @@ function App() {
               </>
             }
           />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
         </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route
           path="*"
           element={<p>No se halló contenido disponible para esta ruta</p>}
@@ -46,9 +53,13 @@ function App() {
           <Offcanvas.Title>Que es babyTracker?</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Proyecto en proceso de desarrollo. Esta desarrollado con react e
-          interactua con una api que fue proporcionada por una materia de la
-          facultad que tiene como objetivo capacitar a los alumnos en react.
+          <p>
+            Proyecto en proceso de desarrollo. Está desarrollado con React e
+            interactúa con una API que fue proporcionada por una materia de la
+            facultad que tiene como objetivo capacitar a los alumnos en React.
+          </p>
+          <p>Usuario de prueba: Qq123</p>
+          <p>Password: Qq123</p>
         </Offcanvas.Body>
       </Offcanvas>
     </BrowserRouter>
