@@ -15,3 +15,11 @@
   background-color: rgba(167, 64, 180, 0.932);
   outline: none;
 }
+
+.disabled {
+  background-color: grey;
+}
+
+.disabled:hover {
+  background-color: grey;
+}

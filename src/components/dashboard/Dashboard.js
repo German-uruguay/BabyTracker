@@ -96,9 +96,6 @@ function Dashboard() {
             <AllEventsChart /> <LastWeekMealsChart />
           </div>
         </AccordionItem>
-        <AccordionItem title={"Listado de todos los eventos"}>
-          <AllEventsList />
-        </AccordionItem>
         <AccordionItem title={"Listado de los eventos de hoy"}>
           <TodayEventsList />
         </AccordionItem>
@@ -108,7 +105,6 @@ function Dashboard() {
         <AccordionItem title={"Tiempo para el próximo biberón"}>
           <TiempoBiberon />
         </AccordionItem>
-
         <AccordionItem title={"Informe diario de biberones"}>
           <BabyBottleReport />
         </AccordionItem>

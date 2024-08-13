@@ -34,7 +34,7 @@ function InformeDeEvento({ dataEvento }) {
 
       const intervalo = setInterval(actualizarDiferenciaEnTiempo, 1000);
       // Limpio el intervalo al desmontar
-      return () => clearInterval(intervalo);
+      return () => clearInterval(intervalo); //para asegurar que el intervalo se limpie cuando se desmonte el componente.
     } else {
       setDiferenciaEnTiempo({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     }
@@ -136,3 +136,5 @@ export default InformeDeEvento;
 //TODO: manejar cuando no se registro ningún biberon
 //TODO: manejar cuando no se registro ningun pañal
 //TODO: si tengo solo un pañal y lo borro, se me romp
+//TODO: n. Mientras uno de los campos (usuario o contraseña)
+//permanezca vacío, el botón de ingresar deberá estar deshabilitado

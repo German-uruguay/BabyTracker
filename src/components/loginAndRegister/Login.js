@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Alert } from "react-bootstrap";
 import { login } from "../../redux/features/userSlice";
@@ -13,9 +13,18 @@ function Login() {
   const [formData, setFormData] = useState({ usuario: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const notify = (mensaje) => toast(mensaje, { autoClose: 1500 });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (formData.usuario.trim() === "" || formData.password.trim() === "") {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,9 +33,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setDisabled(true);
     if (!formData.usuario || !formData.password) {
       setError("Por favor complete todos los campos");
       setLoading(false);
+      setDisabled(false);
       return;
     }
 
@@ -62,6 +73,7 @@ function Login() {
       }
     } finally {
       setLoading(false);
+      setDisabled(false);
     }
   };
 
@@ -92,7 +104,7 @@ function Login() {
               placeholder="Ingresa tu contraseña"
             />
           </Form.Group>
-          <SubmitButton disabled={loading}>
+          <SubmitButton disabled={disabled}>
             {loading ? (
               <Spinner
                 as="span"

@@ -3,7 +3,11 @@ import React from "react";
 
 function SubmitButton({ children, disabled }) {
   return (
-    <button type="submit" className={styles.button} disabled={disabled}>
+    <button
+      type="submit"
+      className={`${styles.button} ${disabled ? styles.disabled : ""}`}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
